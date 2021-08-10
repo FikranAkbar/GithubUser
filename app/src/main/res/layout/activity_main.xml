@@ -7,31 +7,29 @@
     android:layout_margin="16dp"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_github_logo"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/github_mark_black_64px"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/iv_github_text"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:src="@drawable/github_logo_black"
-        app:layout_constraintBottom_toBottomOf="@id/iv_github_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/iv_github_logo"
-        app:layout_constraintTop_toTopOf="@id/iv_github_logo"
-        tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/iv_github_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/github_mark_black_64px"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_github_text"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:src="@drawable/github_logo_black"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
@@ -41,5 +39,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_github_logo" />
+        app:layout_constraintTop_toBottomOf="@id/ll_header" />
 </androidx.constraintlayout.widget.ConstraintLayout>

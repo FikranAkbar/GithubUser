@@ -3,16 +3,24 @@ package com.chessporg.githubuser
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.chessporg.githubuser.databinding.ItemUserBinding
 
 class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     inner class CustomViewHolder(private val itemUserBinding: ItemUserBinding) : RecyclerView.ViewHolder(itemUserBinding.root) {
-        fun bind(user: User) {
+        fun bind(holder: CustomViewHolder, user: User) {
             itemUserBinding.apply {
                 tvName.text = user.name
                 tvUsername.text = user.username
                 tvAddress.text = user.location
+
+                Glide.with(holder.itemView.context)
+                    .load(user.avatar)
+                    .apply(RequestOptions().override(50, 50))
+                    .into(ivUserImage)
             }
         }
     }
@@ -28,8 +36,16 @@ class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<User
 
     override fun onBindViewHolder(holder: UserAdapter.CustomViewHolder, position: Int) {
         val user = list[position]
-        holder.bind(user)
+        holder.bind(holder, user)
     }
 
     override fun getItemCount(): Int = list.size
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(user: User)
+    }
 }
