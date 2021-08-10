@@ -104,6 +104,6 @@
         <item>@drawable/user8</item>
         <item>@drawable/user9</item>
         <item>@drawable/user10</item>
-    </string-array>
+        </string-array>
 
 </resources>
