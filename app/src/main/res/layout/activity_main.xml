@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_github_logo"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/github_mark_black_64px"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/iv_github_text"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
         android:src="@drawable/github_logo_black"
         app:layout_constraintBottom_toBottomOf="@id/iv_github_logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +35,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

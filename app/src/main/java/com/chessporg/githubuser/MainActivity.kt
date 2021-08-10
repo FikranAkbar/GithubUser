@@ -4,6 +4,7 @@ import android.content.res.TypedArray
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,13 @@ class MainActivity : AppCompatActivity() {
 
         getData()
         Log.d(TAG, "onCreate: Get Data Done")
+
+        binding.rvUsers.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            val userAdapter = UserAdapter(userList)
+            adapter = userAdapter
+        }
     }
 
     private fun getData() {
