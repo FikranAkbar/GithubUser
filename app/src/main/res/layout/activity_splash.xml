@@ -4,26 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".SplashActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/iv_github_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/github_user"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:src="@drawable/github_mark_black_120px"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_github_text"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:src="@drawable/github_logo_black"
+        app:layout_constraintTop_toBottomOf="@id/iv_github_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        tools:ignore="ContentDescription" />
 
     <com.tuyenmonkey.mkloader.MKLoader
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:mk_type="Whirlpool"
-        app:mk_color="@color/white"
+        app:mk_color="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
