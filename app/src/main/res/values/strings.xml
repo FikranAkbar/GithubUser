@@ -3,7 +3,13 @@
     <string name="github_user">Github User</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
-    <string name="address">Address</string>
+    <string name="company_address">Company Address</string>
+    <string name="user_name">User Name</string>
+    <string name="real_name">Real Name</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="repository">Repository</string>
+    <string name="follower_1_s_following_2_s">Follower %1$s - Following %2$s</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
@@ -107,6 +113,6 @@
         <item>@drawable/user8</item>
         <item>@drawable/user9</item>
         <item>@drawable/user10</item>
-        </string-array>
+    </string-array>
 
 </resources>

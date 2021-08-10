@@ -9,6 +9,7 @@
     android:paddingVertical="4dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/civ_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
@@ -75,7 +76,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
                 android:ellipsize="end"
-                android:text="@string/address"
+                android:text="@string/company_address"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="italic"

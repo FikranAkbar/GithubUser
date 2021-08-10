@@ -21,6 +21,10 @@ class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<User
                     .load(user.avatar)
                     .apply(RequestOptions().override(50, 50))
                     .into(ivUserImage)
+
+                civItem.setOnClickListener {
+                    onItemClickCallback.onItemClicked(user)
+                }
             }
         }
     }
