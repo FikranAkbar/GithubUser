@@ -1,10 +1,12 @@
 package com.chessporg.githubuser
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chessporg.githubuser.databinding.ActivityDetailBinding
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -44,6 +46,14 @@ class DetailActivity : AppCompatActivity() {
             tvCompany.text = userData.company
             tvAddress.text = userData.location
             tvRepository.text = userData.repository
+
+            btnShare.setOnClickListener {
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${userData.username}")
+                startActivity(Intent.createChooser(shareIntent, "Share Github Username to"))
+            }
         }
     }
 }

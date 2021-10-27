@@ -2,17 +2,14 @@ package com.chessporg.githubuser
 
 import android.content.Intent
 import android.content.res.TypedArray
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val TAG = "MainActivity"
-    }
+    companion object;
 
     private lateinit var binding: ActivityMainBinding
 
@@ -34,8 +31,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getData()
-        Log.d(TAG, "onCreate: Get Data Done")
+        setHomeScreen()
+    }
 
+    private fun setHomeScreen() {
         binding.rvUsers.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@MainActivity)

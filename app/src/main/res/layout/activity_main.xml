@@ -24,7 +24,6 @@
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/iv_github_text"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:src="@drawable/github_logo_black"
