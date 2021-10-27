@@ -10,11 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUser"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".DetailActivity"
+        <activity android:name=".ui.detail.DetailActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.MainActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
     </application>
 

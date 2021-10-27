@@ -1,10 +1,13 @@
-package com.chessporg.githubuser
+package com.chessporg.githubuser.ui.home
 
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chessporg.githubuser.ui.detail.DetailActivity
+import com.chessporg.githubuser.R
+import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

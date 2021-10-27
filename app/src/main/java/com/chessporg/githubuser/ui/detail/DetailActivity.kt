@@ -1,10 +1,12 @@
-package com.chessporg.githubuser
+package com.chessporg.githubuser.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.chessporg.githubuser.R
+import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.ActivityDetailBinding
 
 

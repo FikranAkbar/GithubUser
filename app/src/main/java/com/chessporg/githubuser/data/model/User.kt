@@ -1,4 +1,4 @@
-package com.chessporg.githubuser
+package com.chessporg.githubuser.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

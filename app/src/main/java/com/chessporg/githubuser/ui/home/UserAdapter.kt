@@ -1,10 +1,11 @@
-package com.chessporg.githubuser
+package com.chessporg.githubuser.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.ItemUserBinding
 
 class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
@@ -32,13 +33,13 @@ class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<User
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): UserAdapter.CustomViewHolder {
+    ): CustomViewHolder {
         val itemUserBinding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CustomViewHolder(itemUserBinding)
     }
 
 
-    override fun onBindViewHolder(holder: UserAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val user = list[position]
         holder.bind(holder, user)
     }
