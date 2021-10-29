@@ -48,7 +48,6 @@ class DetailActivity : AppCompatActivity() {
             tvCompany.text = userData.company
             tvAddress.text = userData.location
             tvRepository.text = userData.repository
-
             btnShare.setOnClickListener {
                 val shareIntent = Intent()
                 shareIntent.action = Intent.ACTION_SEND

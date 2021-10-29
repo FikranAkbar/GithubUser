@@ -1,20 +1,17 @@
 package com.chessporg.githubuser.ui.home
 
-import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chessporg.githubuser.ui.detail.DetailActivity
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.User
-import com.chessporg.githubuser.databinding.ActivityMainBinding
+import com.chessporg.githubuser.databinding.FragmentHomeBinding
 
-class MainActivity : AppCompatActivity() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    companion object;
-
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentHomeBinding
 
     //region DataUser
     private lateinit var dataName: Array<String>
@@ -28,29 +25,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userList: ArrayList<User>
     //endregion
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
 
         getData()
         setHomeScreen()
-    }
-
-    private fun setHomeScreen() {
-        binding.rvUsers.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            val userAdapter = UserAdapter(userList)
-            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-                override fun onItemClicked(user: User) {
-                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.DATA, user)
-                    startActivity(intent)
-                }
-            })
-            adapter = userAdapter
-        }
     }
 
     private fun getData() {
@@ -64,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         dataAvatar = resources.obtainTypedArray(R.array.avatar)
 
         userList = arrayListOf()
-        for(i in dataName.indices) {
+        for (i in dataName.indices) {
             val user = User(
                 name = dataName[i],
                 username = dataUsername[i],
@@ -76,6 +56,20 @@ class MainActivity : AppCompatActivity() {
                 avatar = dataAvatar.getResourceId(i, -1),
             )
             userList.add(user)
+        }
+    }
+
+    private fun setHomeScreen() {
+        binding.rvUsers.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
+            val userAdapter = UserAdapter(userList)
+            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+                override fun onItemClicked(user: User) {
+
+                }
+            })
+            adapter = userAdapter
         }
     }
 }

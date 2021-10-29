@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.chessporg.githubuser.R
-import com.chessporg.githubuser.ui.home.MainActivity
+import com.chessporg.githubuser.ui.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
