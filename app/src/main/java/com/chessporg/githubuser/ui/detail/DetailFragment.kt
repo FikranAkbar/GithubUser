@@ -3,6 +3,7 @@ package com.chessporg.githubuser.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chessporg.githubuser.R
@@ -15,6 +16,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         const val DATA = "USER_DATA"
     }
 
+    private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: FragmentDetailBinding
     private lateinit var userData: User
 

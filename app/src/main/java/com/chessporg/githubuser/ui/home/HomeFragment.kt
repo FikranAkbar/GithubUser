@@ -4,6 +4,7 @@ import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.User
@@ -12,6 +13,7 @@ import com.chessporg.githubuser.databinding.FragmentHomeBinding
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModels()
 
     //region DataUser
     private lateinit var dataName: Array<String>
