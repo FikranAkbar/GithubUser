@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.FragmentHomeBinding
+import kotlinx.coroutines.flow.collect
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCallback {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
@@ -32,7 +35,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         getData()
-        setHomeScreen()
+
+        binding.rvUsers.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
+            val userAdapter = UserAdapter(userList, this@HomeFragment)
+            adapter = userAdapter
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.usersEvent.collect { event ->
+                when (event) {
+                    is HomeViewModel.UsersEvent.NavigateToDetailUser -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(event.user)
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+        }
     }
 
     private fun getData() {
@@ -61,17 +81,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun setHomeScreen() {
-        binding.rvUsers.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
-            val userAdapter = UserAdapter(userList)
-            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-                override fun onItemClicked(user: User) {
+    override fun onItemClicked(user: User) {
+        viewModel.onUserSelected(user)
 
-                }
-            })
-            adapter = userAdapter
-        }
     }
 }

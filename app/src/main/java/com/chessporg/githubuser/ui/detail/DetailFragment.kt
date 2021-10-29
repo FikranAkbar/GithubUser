@@ -11,11 +11,6 @@ import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
-
-    companion object {
-        const val DATA = "USER_DATA"
-    }
-
     private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: FragmentDetailBinding
     private lateinit var userData: User

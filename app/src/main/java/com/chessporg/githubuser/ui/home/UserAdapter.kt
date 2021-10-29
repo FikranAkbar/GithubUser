@@ -8,9 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.ItemUserBinding
 
-class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
-
+class UserAdapter(private val list: ArrayList<User>, private val listener: OnItemClickCallback) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
     inner class CustomViewHolder(private val itemUserBinding: ItemUserBinding) : RecyclerView.ViewHolder(itemUserBinding.root) {
         fun bind(holder: CustomViewHolder, user: User) {
             itemUserBinding.apply {
@@ -24,7 +22,7 @@ class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<User
                     .into(ivUserImage)
 
                 civItem.setOnClickListener {
-                    onItemClickCallback.onItemClicked(user)
+                    listener.onItemClicked(user)
                 }
             }
         }
@@ -46,9 +44,6 @@ class UserAdapter(private val list: ArrayList<User>) : RecyclerView.Adapter<User
 
     override fun getItemCount(): Int = list.size
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
 
     interface OnItemClickCallback {
         fun onItemClicked(user: User)
