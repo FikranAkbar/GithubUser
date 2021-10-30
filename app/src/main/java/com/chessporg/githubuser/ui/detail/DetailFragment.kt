@@ -22,7 +22,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
 
-
         binding.apply {
             ivBackButton.setOnClickListener {
                 viewModel.onBackClick()
