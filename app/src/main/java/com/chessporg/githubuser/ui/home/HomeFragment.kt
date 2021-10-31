@@ -53,6 +53,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                 }
             }
         }
+
+        viewModel.getUserByName("Fikran")
     }
 
     private fun getData() {
@@ -83,6 +85,5 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
 
     override fun onItemClicked(user: User) {
         viewModel.onUserSelected(user)
-
     }
 }
