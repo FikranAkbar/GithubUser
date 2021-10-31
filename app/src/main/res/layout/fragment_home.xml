@@ -6,28 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/ll_header"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/iv_github_logo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/github_mark_black_64px"
-            tools:ignore="ContentDescription" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FBF4F4"
+            android:elevation="@dimen/design_appbar_elevation"
+            app:titleTextColor="@color/black">
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:src="@drawable/github_logo_black"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/github_logo_black"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
@@ -37,6 +39,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_header" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
