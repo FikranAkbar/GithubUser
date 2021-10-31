@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.FragmentHomeBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCallback {
 
@@ -54,7 +56,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
             }
         }
 
+        viewModel.searchQuery.observe(viewLifecycleOwner) {
+            viewModel.getUserByName(it)
+        }
+
         viewModel.getUserByName("Fikran")
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.queryResult.collectLatest {
+                Snackbar.make(binding.root, "Wuewww masuk", Snackbar.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun getData() {

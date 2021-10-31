@@ -8,6 +8,7 @@ import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.data.model.UserSearchResponse
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -21,7 +22,8 @@ class HomeViewModel(
     private val usersEventChannel = Channel<UsersEvent>()
     val usersEvent = usersEventChannel.receiveAsFlow()
 
-    val queryResult = state.getLiveData("queryResult", ArrayList<UserResponse>())
+    var searchQuery = state.getLiveData("searchQuery", "")
+    val queryResult = MutableStateFlow<ArrayList<UserResponse>>(arrayListOf())
 
     fun onUserSelected(user: User) = viewModelScope.launch {
         usersEventChannel.send(UsersEvent.NavigateToDetailUser(user))
@@ -37,7 +39,7 @@ class HomeViewModel(
                     response: Response<UserSearchResponse>
                 ) {
                     if (response.isSuccessful) {
-                        queryResult.postValue(response.body()?.items!!)
+                        queryResult.value = response.body()?.items!!
                     }
                 }
 
