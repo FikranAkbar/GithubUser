@@ -6,6 +6,9 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+def STRING = 'String'
+def GITHUBUSER_API_KEY = '"' + GithubUserApi + '"' ?: '"Define your Github User Api Key!"'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -22,6 +25,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each { type ->
+            type.buildConfigField STRING, 'GithubUserApi', GITHUBUSER_API_KEY
+        }
     }
 
     buildTypes {
