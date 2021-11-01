@@ -13,7 +13,6 @@ import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 
 class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCallback {
 
@@ -45,26 +44,27 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
             adapter = userAdapter
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.usersEvent.collect { event ->
-                when (event) {
-                    is HomeViewModel.UsersEvent.NavigateToDetailUser -> {
-                        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(event.user)
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-        }
-
         viewModel.searchQuery.observe(viewLifecycleOwner) {
             viewModel.getUserByName(it)
         }
 
-        viewModel.getUserByName("Fikran")
-
         lifecycleScope.launchWhenStarted {
-            viewModel.queryResult.collectLatest {
-                Snackbar.make(binding.root, "Wuewww masuk", Snackbar.LENGTH_LONG).show()
+            viewModel.homeEvent.collect { event ->
+                when(event) {
+                    is HomeViewModel.HomeEvent.Error -> {
+
+                    }
+                    HomeViewModel.HomeEvent.LoadingQuery -> {
+
+                    }
+                    is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(event.user)
+                        findNavController().navigate(action)
+                    }
+                    is HomeViewModel.HomeEvent.SuccessQuery -> {
+
+                    }
+                }
             }
         }
     }
