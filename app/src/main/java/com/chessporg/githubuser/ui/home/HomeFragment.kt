@@ -1,9 +1,7 @@
 package com.chessporg.githubuser.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +13,6 @@ import com.chessporg.githubuser.databinding.FragmentHomeBinding
 import com.chessporg.githubuser.utils.onQueryTextChanged
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
-import okhttp3.internal.notifyAll
 
 class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCallback {
 
@@ -37,7 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
 
             svUser.onQueryTextChanged {
                 viewModel.searchQuery.postValue(it)
-                Log.d("TEST", "Teks berubah")
             }
         }
 
@@ -51,10 +47,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
             viewModel.homeEvent.collect { event ->
                 when (event) {
                     is HomeViewModel.HomeEvent.Error -> {
+                        showLoading(false)
                         Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
                     }
                     is HomeViewModel.HomeEvent.LoadingQuery -> {
-
+                        showLoading(true)
                     }
                     is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
                         val action =
@@ -62,9 +59,37 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                         findNavController().navigate(action)
                     }
                     is HomeViewModel.HomeEvent.SuccessQuery -> {
+                        showLoading(false)
                         userAdapter.submitList(event.result)
-                        Log.d("TEST", "DATA MASUK")
                     }
+                }
+            }
+        }
+    }
+
+    private fun showLoading(bool: Boolean) {
+        binding.apply {
+            when(bool) {
+                true -> {
+                    shimmerLayout.visibility = View.GONE
+                    rvUsers.visibility = View.VISIBLE
+                }
+                else -> {
+                    shimmerLayout.visibility = View.VISIBLE
+                    rvUsers.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun showEmptyListWarning(bool: Boolean) {
+        binding.apply {
+            when(bool) {
+                true -> {
+
+                }
+                else -> {
+
                 }
             }
         }

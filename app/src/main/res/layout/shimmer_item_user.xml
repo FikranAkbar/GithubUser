@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:paddingHorizontal="8dp"
     android:paddingVertical="4dp">
 
@@ -15,7 +14,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="#F1E9E9"
+        app:cardBackgroundColor="@color/shimmer_placeholder"
         app:cardCornerRadius="32dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,9 +26,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:src="@drawable/github_mark_black_120px"
-                app:civ_border_color="#FFFFFF"
-                app:civ_border_width="2dp"
+                android:padding="1dp"
+                android:src="@color/shimmer_inside_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,12 +39,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="20dp"
                 android:ellipsize="end"
-                android:text="@string/username"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:background="@color/shimmer_inside_item"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_user_image"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
-                android:text="@string/user_id"
+                android:background="@color/shimmer_inside_item"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="italic"
