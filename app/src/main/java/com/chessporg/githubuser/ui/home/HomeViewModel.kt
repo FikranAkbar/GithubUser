@@ -1,6 +1,6 @@
 package com.chessporg.githubuser.ui.home
 
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chessporg.githubuser.data.api.APIClient
@@ -8,21 +8,18 @@ import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.data.model.UserListResponse
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(
-    private val state: SavedStateHandle
-) : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val homeEventChannel = Channel<HomeEvent>()
     val homeEvent = homeEventChannel.receiveAsFlow()
 
-    var searchQuery = state.getLiveData("searchQuery", "")
+    var searchQuery = MutableLiveData<String>()
 
     fun onUserSelected(user: User) = viewModelScope.launch {
         homeEventChannel.send(HomeEvent.NavigateToDetailUser(user))
@@ -66,9 +63,9 @@ class HomeViewModel(
     }
 
     sealed class HomeEvent {
-        data class NavigateToDetailUser(val user: User): HomeEvent()
-        data class SuccessQuery(val result: ArrayList<UserResponse>): HomeEvent()
-        object LoadingQuery: HomeEvent()
-        data class Error(val message: String): HomeEvent()
+        data class NavigateToDetailUser(val user: User) : HomeEvent()
+        data class SuccessQuery(val result: ArrayList<UserResponse>) : HomeEvent()
+        object LoadingQuery : HomeEvent()
+        data class Error(val message: String) : HomeEvent()
     }
 }
