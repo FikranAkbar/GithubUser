@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.databinding.FragmentHomeBinding
+import com.chessporg.githubuser.utils.onQueryTextChanged
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 
@@ -37,11 +38,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
 
         getData()
 
-        binding.rvUsers.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
-            val userAdapter = UserAdapter(userList, this@HomeFragment)
-            adapter = userAdapter
+        binding.apply {
+            rvUsers.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(activity)
+                val userAdapter = UserAdapter(userList, this@HomeFragment)
+                adapter = userAdapter
+            }
+
+            svUser.onQueryTextChanged {
+                viewModel.searchQuery.value = it
+            }
         }
 
         viewModel.searchQuery.observe(viewLifecycleOwner) {
