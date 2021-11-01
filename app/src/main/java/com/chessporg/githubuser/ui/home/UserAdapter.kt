@@ -1,5 +1,6 @@
 package com.chessporg.githubuser.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,9 +48,11 @@ class UserAdapter(private val listener: OnItemClickCallback) : RecyclerView.Adap
 
     override fun getItemCount(): Int = users.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitList(list: List<UserResponse>) {
         users.clear()
         users.addAll(list)
+        notifyDataSetChanged()
     }
 
     interface OnItemClickCallback {

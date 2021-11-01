@@ -1,7 +1,9 @@
 package com.chessporg.githubuser.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +13,9 @@ import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.databinding.FragmentHomeBinding
 import com.chessporg.githubuser.utils.onQueryTextChanged
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
+import okhttp3.internal.notifyAll
 
 class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCallback {
 
@@ -32,9 +36,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
             }
 
             svUser.onQueryTextChanged {
-                viewModel.searchQuery.value = it
+                viewModel.searchQuery.postValue(it)
+                Log.d("TEST", "Teks berubah")
             }
         }
+
+        viewModel.getUserByName("a")
 
         viewModel.searchQuery.observe(viewLifecycleOwner) {
             viewModel.getUserByName(it)
@@ -44,9 +51,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
             viewModel.homeEvent.collect { event ->
                 when (event) {
                     is HomeViewModel.HomeEvent.Error -> {
-
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
                     }
-                    HomeViewModel.HomeEvent.LoadingQuery -> {
+                    is HomeViewModel.HomeEvent.LoadingQuery -> {
 
                     }
                     is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
@@ -56,6 +63,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                     }
                     is HomeViewModel.HomeEvent.SuccessQuery -> {
                         userAdapter.submitList(event.result)
+                        Log.d("TEST", "DATA MASUK")
                     }
                 }
             }
