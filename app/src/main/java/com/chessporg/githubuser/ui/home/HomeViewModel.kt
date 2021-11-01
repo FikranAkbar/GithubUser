@@ -19,17 +19,29 @@ class HomeViewModel(
     private val state: SavedStateHandle
 ) : ViewModel() {
 
-    private val usersEventChannel = Channel<UsersEvent>()
-    val usersEvent = usersEventChannel.receiveAsFlow()
+    private val homeEventChannel = Channel<HomeEvent>()
+    val homeEvent = homeEventChannel.receiveAsFlow()
 
     var searchQuery = state.getLiveData("searchQuery", "")
-    val queryResult = MutableStateFlow<ArrayList<UserResponse>>(arrayListOf())
 
     fun onUserSelected(user: User) = viewModelScope.launch {
-        usersEventChannel.send(UsersEvent.NavigateToDetailUser(user))
+        homeEventChannel.send(HomeEvent.NavigateToDetailUser(user))
+    }
+
+    private fun onApiCallStarted() = viewModelScope.launch {
+        homeEventChannel.send(HomeEvent.LoadingQuery)
+    }
+
+    private fun onApiCallSuccess(result: ArrayList<UserResponse>) = viewModelScope.launch {
+        homeEventChannel.send(HomeEvent.SuccessQuery(result))
+    }
+
+    private fun onApiCallError(text: String) = viewModelScope.launch {
+        homeEventChannel.send(HomeEvent.Error(text))
     }
 
     fun getUserByName(query: String) = viewModelScope.launch {
+        onApiCallStarted()
         APIClient
             .service
             .getUsersByName(query)
@@ -39,17 +51,24 @@ class HomeViewModel(
                     response: Response<UserListResponse>
                 ) {
                     if (response.isSuccessful) {
-                        queryResult.value = response.body()?.items!!
+                        val queryResult = response.body()?.items!!
+                        onApiCallSuccess(queryResult)
+                    } else {
+                        onApiCallError("Fetching Data Failed...")
                     }
                 }
 
                 override fun onFailure(call: Call<UserListResponse>, t: Throwable) {
+                    onApiCallError("Network Failed...")
                     throw t
                 }
             })
     }
 
-    sealed class UsersEvent {
-        data class NavigateToDetailUser(val user: User) : UsersEvent()
+    sealed class HomeEvent {
+        data class NavigateToDetailUser(val user: User): HomeEvent()
+        data class SuccessQuery(val result: ArrayList<UserResponse>): HomeEvent()
+        object LoadingQuery: HomeEvent()
+        data class Error(val message: String): HomeEvent()
     }
 }
