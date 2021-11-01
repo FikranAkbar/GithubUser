@@ -28,6 +28,11 @@
                 android:src="@drawable/github_logo_black"
                 tools:ignore="ContentDescription" />
 
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end" />
+
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
