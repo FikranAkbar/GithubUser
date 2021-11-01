@@ -4,9 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chessporg.githubuser.data.api.APIClient
-import com.chessporg.githubuser.data.model.User
-import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.data.model.UserListResponse
+import com.chessporg.githubuser.data.model.UserResponse
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -21,8 +20,8 @@ class HomeViewModel : ViewModel() {
 
     var searchQuery = MutableLiveData<String>()
 
-    fun onUserSelected(user: User) = viewModelScope.launch {
-        homeEventChannel.send(HomeEvent.NavigateToDetailUser(user))
+    fun onUserSelected(user: UserResponse) = viewModelScope.launch {
+        homeEventChannel.send(HomeEvent.NavigateToDetailUser(user.username))
     }
 
     private fun onApiCallStarted() = viewModelScope.launch {
@@ -63,7 +62,7 @@ class HomeViewModel : ViewModel() {
     }
 
     sealed class HomeEvent {
-        data class NavigateToDetailUser(val user: User) : HomeEvent()
+        data class NavigateToDetailUser(val username: String) : HomeEvent()
         data class SuccessQuery(val result: ArrayList<UserResponse>) : HomeEvent()
         object LoadingQuery : HomeEvent()
         data class Error(val message: String) : HomeEvent()

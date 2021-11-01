@@ -23,7 +23,7 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="user"
-            app:argType="com.chessporg.githubuser.data.model.User" />
+            android:name="username"
+            app:argType="string" />
     </fragment>
 </navigation>
