@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.chessporg.githubuser.data.api.APIClient
 import com.chessporg.githubuser.data.model.User
 import com.chessporg.githubuser.data.model.UserResponse
-import com.chessporg.githubuser.data.model.UserSearchResponse
+import com.chessporg.githubuser.data.model.UserListResponse
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -33,17 +33,17 @@ class HomeViewModel(
         APIClient
             .service
             .getUsersByName(query)
-            .enqueue(object : Callback<UserSearchResponse> {
+            .enqueue(object : Callback<UserListResponse> {
                 override fun onResponse(
-                    call: Call<UserSearchResponse>,
-                    response: Response<UserSearchResponse>
+                    call: Call<UserListResponse>,
+                    response: Response<UserListResponse>
                 ) {
                     if (response.isSuccessful) {
                         queryResult.value = response.body()?.items!!
                     }
                 }
 
-                override fun onFailure(call: Call<UserSearchResponse>, t: Throwable) {
+                override fun onFailure(call: Call<UserListResponse>, t: Throwable) {
                     throw t
                 }
             })
