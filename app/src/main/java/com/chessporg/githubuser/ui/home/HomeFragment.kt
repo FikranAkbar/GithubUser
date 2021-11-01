@@ -52,6 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                     }
                     is HomeViewModel.HomeEvent.LoadingQuery -> {
                         showLoading(true)
+                        showLoading(false)
                     }
                     is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
                         val action =
@@ -61,6 +62,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                     is HomeViewModel.HomeEvent.SuccessQuery -> {
                         showLoading(false)
                         userAdapter.submitList(event.result)
+                        when(userAdapter.itemCount) {
+                            0 -> {
+                                showEmptyListWarning(true)
+                            }
+                            else -> {
+                                showEmptyListWarning(false)
+                            }
+                        }
                     }
                 }
             }
@@ -71,12 +80,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
         binding.apply {
             when(bool) {
                 true -> {
-                    shimmerLayout.visibility = View.GONE
-                    rvUsers.visibility = View.VISIBLE
-                }
-                else -> {
                     shimmerLayout.visibility = View.VISIBLE
                     rvUsers.visibility = View.GONE
+                }
+                else -> {
+                    shimmerLayout.visibility = View.GONE
+                    rvUsers.visibility = View.VISIBLE
                 }
             }
         }
@@ -86,10 +95,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
         binding.apply {
             when(bool) {
                 true -> {
-
+                    layoutUserNotFound.root.visibility = View.VISIBLE
                 }
                 else -> {
-
+                    layoutUserNotFound.root.visibility = View.GONE
                 }
             }
         }
