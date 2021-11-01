@@ -47,6 +47,26 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
         viewModel.searchQuery.observe(viewLifecycleOwner) {
             viewModel.getUserByName(it)
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.homeEvent.collect { event ->
+                when(event) {
+                    is HomeViewModel.HomeEvent.Error -> {
+
+                    }
+                    HomeViewModel.HomeEvent.LoadingQuery -> {
+
+                    }
+                    is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(event.user)
+                        findNavController().navigate(action)
+                    }
+                    is HomeViewModel.HomeEvent.SuccessQuery -> {
+
+                    }
+                }
+            }
+        }
     }
 
     private fun getData() {

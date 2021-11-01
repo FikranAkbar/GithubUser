@@ -14,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailViewModel(
-    private val state: SavedStateHandle
+    state: SavedStateHandle
 ) : ViewModel() {
 
     private val detailUserEventChannel = Channel<DetailUserEvent>()
