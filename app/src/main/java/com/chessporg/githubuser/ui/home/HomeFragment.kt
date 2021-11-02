@@ -78,7 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
 
     private fun showLoading(bool: Boolean) {
         binding.apply {
-            when(bool) {
+            when (bool) {
                 true -> {
                     shimmerLayout.visibility = View.VISIBLE
                     rvUsers.visibility = View.GONE
@@ -93,7 +93,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
 
     private fun showEmptyListWarning(bool: Boolean) {
         binding.apply {
-            when(bool) {
+            when (bool) {
                 true -> {
                     layoutUserNotFound.root.visibility = View.VISIBLE
                 }
