@@ -27,6 +27,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             R.string.tab_text_1,
             R.string.tab_text_2
         )
+
+        const val EXTRA_USERNAME = "extra_username"
     }
 
     private val viewModel: DetailViewModel by viewModels()
@@ -36,9 +38,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
 
-        viewModel.getUserDetail(viewModel.user!!)
+        val mBundle = Bundle()
+        val username = viewModel.user!!
+        mBundle.putString(EXTRA_USERNAME, username)
+        viewModel.getUserDetail(username)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity() as AppCompatActivity)
+        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity() as AppCompatActivity, mBundle)
         val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = view.findViewById(R.id.tabs)
