@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.chessporg.githubuser.data.model.User
+import com.bumptech.glide.request.transition.DrawableCrossFadeTransition
 import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.databinding.ItemUserBinding
 
-class UserAdapter(private val listener: OnItemClickCallback) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
+class UserAdapter(private val listener: OnItemClickCallback) :
+    RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
 
     private val users = ArrayList<UserResponse>()
 
-    inner class CustomViewHolder(private val itemUserBinding: ItemUserBinding) : RecyclerView.ViewHolder(itemUserBinding.root) {
+    inner class CustomViewHolder(private val itemUserBinding: ItemUserBinding) :
+        RecyclerView.ViewHolder(itemUserBinding.root) {
         fun bind(holder: CustomViewHolder, user: UserResponse) {
             itemUserBinding.apply {
                 tvUsername.text = user.username
@@ -36,7 +39,8 @@ class UserAdapter(private val listener: OnItemClickCallback) : RecyclerView.Adap
         parent: ViewGroup,
         viewType: Int
     ): CustomViewHolder {
-        val itemUserBinding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemUserBinding =
+            ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CustomViewHolder(itemUserBinding)
     }
 

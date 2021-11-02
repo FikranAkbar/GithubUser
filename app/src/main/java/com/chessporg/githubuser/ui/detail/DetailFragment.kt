@@ -27,6 +27,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             R.string.tab_text_1,
             R.string.tab_text_2
         )
+
+        const val EXTRA_USERNAME = "extra_username"
     }
 
     private val viewModel: DetailViewModel by viewModels()
@@ -36,9 +38,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
 
-        viewModel.getUserDetail(viewModel.user!!)
+        val mBundle = Bundle()
+        val username = viewModel.user!!
+        mBundle.putString(EXTRA_USERNAME, username)
+        viewModel.getUserDetail(username)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity() as AppCompatActivity)
+        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity() as AppCompatActivity, mBundle)
         val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = view.findViewById(R.id.tabs)
@@ -49,6 +54,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.apply {
             ivBackButton.setOnClickListener {
                 viewModel.onBackClick()
+            }
+            ivShare.setOnClickListener {
+                viewModel.onShareClick(viewModel.user!!)
             }
         }
 
@@ -62,11 +70,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         val shareIntent = Intent()
                         shareIntent.action = Intent.ACTION_SEND
                         shareIntent.type = "text/plain"
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.userData.username}")
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.username}")
                         startActivity(Intent.createChooser(shareIntent, "Share Github Username to"))
                     }
                     is DetailViewModel.DetailUserEvent.Error -> {
-
+                        showLoading(false)
                     }
                     is DetailViewModel.DetailUserEvent.Loading -> {
                         showLoading(true)
@@ -78,7 +86,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 tvUsername.text = username
                                 tvUserId.text = "$id"
                                 tvFollowerFollowing.text = getString(R.string.follower_1_s_following_2_s, followers.toString(), following.toString())
-                                tvRepository.text = "$public_repos"
+                                tvRepository.text = getString(R.string.repository_1s, public_repos.toString())
 
                                 Glide.with(this@DetailFragment)
                                     .load(avatar_url)

@@ -26,8 +26,8 @@ class DetailViewModel(
         detailUserEventChannel.send(DetailUserEvent.NavigateBackToHome)
     }
 
-    fun onShareClick(userData: User) = viewModelScope.launch {
-        detailUserEventChannel.send(DetailUserEvent.ShareGithubUserData(userData))
+    fun onShareClick(username: String) = viewModelScope.launch {
+        detailUserEventChannel.send(DetailUserEvent.ShareGithubUserData(username))
     }
 
     private fun onGetUserDetailStarted() = viewModelScope.launch {
@@ -68,7 +68,7 @@ class DetailViewModel(
 
     sealed class DetailUserEvent {
         object NavigateBackToHome : DetailUserEvent()
-        data class ShareGithubUserData(val userData: User) : DetailUserEvent()
+        data class ShareGithubUserData(val username: String) : DetailUserEvent()
         object Loading : DetailUserEvent()
         data class Success(val data: UserDetailResponse) : DetailUserEvent()
         data class Error(val message: String) : DetailUserEvent()

@@ -40,8 +40,7 @@ class FollowingViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         onGetUserFollowingSuccess(response.body()!!)
-                    }
-                    else {
+                    } else {
                         onGetUserFollowingFailed("Fetching Data Failed...")
                     }
                 }
