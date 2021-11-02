@@ -55,6 +55,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ivBackButton.setOnClickListener {
                 viewModel.onBackClick()
             }
+            ivShare.setOnClickListener {
+                viewModel.onShareClick(viewModel.user!!)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -67,11 +70,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         val shareIntent = Intent()
                         shareIntent.action = Intent.ACTION_SEND
                         shareIntent.type = "text/plain"
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.userData.username}")
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.username}")
                         startActivity(Intent.createChooser(shareIntent, "Share Github Username to"))
                     }
                     is DetailViewModel.DetailUserEvent.Error -> {
-
+                        showLoading(false)
                     }
                     is DetailViewModel.DetailUserEvent.Loading -> {
                         showLoading(true)

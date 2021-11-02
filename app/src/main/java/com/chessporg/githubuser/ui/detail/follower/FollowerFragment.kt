@@ -47,10 +47,19 @@ class FollowerFragment : Fragment(R.layout.fragment_follow), UserAdapter.OnItemC
                     }
                     is FollowerViewModel.FollowerEvent.Loading -> {
                         showLoading(true)
+                        showEmptyListWarning(false)
                     }
                     is FollowerViewModel.FollowerEvent.Success -> {
                         showLoading(false)
                         userAdapter.submitList(event.result)
+                        when(userAdapter.itemCount) {
+                            0 -> {
+                                showEmptyListWarning(true)
+                            }
+                            else -> {
+                                showEmptyListWarning(false)
+                            }
+                        }
                     }
                 }
             }
@@ -67,6 +76,19 @@ class FollowerFragment : Fragment(R.layout.fragment_follow), UserAdapter.OnItemC
                 else -> {
                     shimmerLayout.visibility = View.GONE
                     rvUsers.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun showEmptyListWarning(bool: Boolean) {
+        binding.apply {
+            when (bool) {
+                true -> {
+                    layoutUserNotFound.root.visibility = View.VISIBLE
+                }
+                else -> {
+                    layoutUserNotFound.root.visibility = View.GONE
                 }
             }
         }
