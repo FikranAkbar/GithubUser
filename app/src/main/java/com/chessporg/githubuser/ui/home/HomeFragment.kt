@@ -52,7 +52,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                     }
                     is HomeViewModel.HomeEvent.LoadingQuery -> {
                         showLoading(true)
-                        showLoading(false)
                     }
                     is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
                         val action =
