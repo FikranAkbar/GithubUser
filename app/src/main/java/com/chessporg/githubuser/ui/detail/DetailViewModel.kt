@@ -20,7 +20,7 @@ class DetailViewModel(
     private val detailUserEventChannel = Channel<DetailUserEvent>()
     val detailUserEvent = detailUserEventChannel.receiveAsFlow()
 
-    val user = state.get<User>("user")
+    val user = state.get<String>("username")
 
     fun onBackClick() = viewModelScope.launch {
         detailUserEventChannel.send(DetailUserEvent.NavigateBackToHome)

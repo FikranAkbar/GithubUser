@@ -51,6 +51,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                         Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
                     }
                     is HomeViewModel.HomeEvent.LoadingQuery -> {
+                        showEmptyListWarning(false)
                         showLoading(true)
                     }
                     is HomeViewModel.HomeEvent.NavigateToDetailUser -> {
