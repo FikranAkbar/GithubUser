@@ -24,6 +24,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="user"
-            app:argType="com.chessporg.githubuser.data.model.User" />
+            app:argType="string" />
     </fragment>
 </navigation>

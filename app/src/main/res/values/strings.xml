@@ -10,6 +10,10 @@
     <string name="repository">Repository</string>
     <string name="follower_1_s_following_2_s">Follower %1$s - Following %2$s</string>
     <string name="share">Share</string>
+    <string name="repository_1s">Repository %1s</string>
+    <string name="tab_text_1">Follower</string>
+    <string name="tab_text_2">Following</string>
+    <string name="user_id">user id</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
