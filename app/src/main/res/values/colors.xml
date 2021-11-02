@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tab_text_color_unselected">#3E3E3E</color>
+    <color name="shimmer_placeholder">#dddddd</color>
+    <color name="shimmer_inside_item">#C5C4C4</color>
 </resources>

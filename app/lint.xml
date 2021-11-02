@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconExtension">
+        <ignore path="src/main/res/drawable/user1.png" />
+        <ignore path="src/main/res/drawable/user2.png" />
+        <ignore path="src/main/res/drawable/user3.png" />
+        <ignore path="src/main/res/drawable/user4.png" />
+        <ignore path="src/main/res/drawable/user5.png" />
+        <ignore path="src/main/res/drawable/user6.png" />
+        <ignore path="src/main/res/drawable/user9.png" />
+    </issue>
+    <issue id="IconLauncherShape">
+        <ignore path="src/main/res/drawable/github_mark_black_120px.png" />
+    </issue>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/github_logo_black.png" />
+        <ignore path="src/main/res/drawable/github_mark_black_120px.png" />
+        <ignore path="src/main/res/drawable/github_mark_black_64px.png" />
+        <ignore path="src/main/res/drawable/user1.png" />
+        <ignore path="src/main/res/drawable/user10.png" />
+        <ignore path="src/main/res/drawable/user2.png" />
+        <ignore path="src/main/res/drawable/user3.png" />
+        <ignore path="src/main/res/drawable/user4.png" />
+        <ignore path="src/main/res/drawable/user5.png" />
+        <ignore path="src/main/res/drawable/user6.png" />
+        <ignore path="src/main/res/drawable/user7.png" />
+        <ignore path="src/main/res/drawable/user8.png" />
+        <ignore path="src/main/res/drawable/user9.png" />
+    </issue>
+</lint>
