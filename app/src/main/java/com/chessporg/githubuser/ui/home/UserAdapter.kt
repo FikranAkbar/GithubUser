@@ -1,23 +1,27 @@
 package com.chessporg.githubuser.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chessporg.githubuser.data.model.User
+import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.databinding.ItemUserBinding
 
-class UserAdapter(private val list: ArrayList<User>, private val listener: OnItemClickCallback) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
+class UserAdapter(private val listener: OnItemClickCallback) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
+
+    private val users = ArrayList<UserResponse>()
+
     inner class CustomViewHolder(private val itemUserBinding: ItemUserBinding) : RecyclerView.ViewHolder(itemUserBinding.root) {
-        fun bind(holder: CustomViewHolder, user: User) {
+        fun bind(holder: CustomViewHolder, user: UserResponse) {
             itemUserBinding.apply {
-                tvName.text = user.name
                 tvUsername.text = user.username
-                tvAddress.text = user.location
+                tvUserId.text = "${user.id}"
 
                 Glide.with(holder.itemView.context)
-                    .load(user.avatar)
+                    .load(user.avatar_url)
                     .apply(RequestOptions().override(50, 50))
                     .into(ivUserImage)
 
@@ -38,14 +42,20 @@ class UserAdapter(private val list: ArrayList<User>, private val listener: OnIte
 
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val user = list[position]
+        val user = users[position]
         holder.bind(holder, user)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = users.size
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: List<UserResponse>) {
+        users.clear()
+        users.addAll(list)
+        notifyDataSetChanged()
+    }
 
     interface OnItemClickCallback {
-        fun onItemClicked(user: User)
+        fun onItemClicked(user: UserResponse)
     }
 }
