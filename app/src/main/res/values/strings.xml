@@ -14,7 +14,6 @@
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
     <string name="user_id">user id</string>
-    <string name="user_id">user id</string>
     <string name="user_s_not_found">User(s) not found</string>
 
     <string-array name="username">

@@ -65,9 +65,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.userData.username}")
                         startActivity(Intent.createChooser(shareIntent, "Share Github Username to"))
                     }
-                    is DetailViewModel.DetailUserEvent.Error -> TODO()
-                    is DetailViewModel.DetailUserEvent.Loading -> TODO()
-                    is DetailViewModel.DetailUserEvent.Success -> TODO()
+                    is DetailViewModel.DetailUserEvent.Error -> {
+
+                    }
+                    is DetailViewModel.DetailUserEvent.Loading -> {
+
+                    }
+                    is DetailViewModel.DetailUserEvent.Success -> {
+                        binding.apply {
+                            event.data.apply {
+                                tvUserName.text = username
+                                tvUsername.text = username
+                                tvUserId.text = "$id"
+                            }
+                        }
+                    }
                 }
             }
         }
