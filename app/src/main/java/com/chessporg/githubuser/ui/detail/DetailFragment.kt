@@ -69,7 +69,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                     }
                     is DetailViewModel.DetailUserEvent.Loading -> {
-
+                        showLoading(true)
                     }
                     is DetailViewModel.DetailUserEvent.Success -> {
                         binding.apply {
@@ -85,9 +85,22 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                     .apply(RequestOptions().override(200,200))
                                     .into(civProfilPicture)
                             }
+
+                            showLoading(false)
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun showLoading(bool: Boolean) {
+        when (bool) {
+            true -> {
+                binding.shimmerLayout.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.shimmerLayout.visibility = View.GONE
             }
         }
     }
