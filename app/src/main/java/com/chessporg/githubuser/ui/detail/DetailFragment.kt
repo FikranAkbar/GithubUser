@@ -77,6 +77,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 tvUserName.text = username
                                 tvUsername.text = username
                                 tvUserId.text = "$id"
+                                tvFollowerFollowing.text = getString(R.string.follower_1_s_following_2_s, followers.toString(), following.toString())
+                                tvRepository.text = "$public_repos"
+
+                                Glide.with(this@DetailFragment)
+                                    .load(avatar_url)
+                                    .apply(RequestOptions().override(200,200))
+                                    .into(civProfilPicture)
                             }
                         }
                     }
