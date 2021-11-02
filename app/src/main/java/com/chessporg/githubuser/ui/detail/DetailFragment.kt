@@ -78,7 +78,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 tvUsername.text = username
                                 tvUserId.text = "$id"
                                 tvFollowerFollowing.text = getString(R.string.follower_1_s_following_2_s, followers.toString(), following.toString())
-                                tvRepository.text = "$public_repos"
+                                tvRepository.text = getString(R.string.repository_1s, public_repos.toString())
 
                                 Glide.with(this@DetailFragment)
                                     .load(avatar_url)
