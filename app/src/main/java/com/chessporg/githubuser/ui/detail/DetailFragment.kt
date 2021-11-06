@@ -82,11 +82,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     is DetailViewModel.DetailUserEvent.Success -> {
                         binding.apply {
                             event.data.apply {
-                                tvUserName.text = username
+                                tvName.text = name
                                 tvUsername.text = username
                                 tvUserId.text = "$id"
                                 tvFollowerFollowing.text = getString(R.string.follower_1_s_following_2_s, followers.toString(), following.toString())
                                 tvRepository.text = getString(R.string.repository_1s, public_repos.toString())
+                                tvCompanyLocation.text = getString(R.string.company_location, company, location)
 
                                 Glide.with(this@DetailFragment)
                                     .load(avatar_url)
