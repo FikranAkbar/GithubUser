@@ -32,7 +32,7 @@
                 android:id="@+id/sv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end" />
+                android:layout_gravity="start" />
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
