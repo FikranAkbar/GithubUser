@@ -33,6 +33,10 @@ class FavoriteUserFragment : Fragment(R.layout.fragment_favorite_user),
                 userAdapter = UserAdapter(this@FavoriteUserFragment)
                 adapter = userAdapter
             }
+
+            ivBackButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
         viewModel.favoriteUsers.observe(viewLifecycleOwner) {

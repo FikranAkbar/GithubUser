@@ -42,6 +42,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                 val action = HomeFragmentDirections.actionHomeFragmentToFavoriteUserFragment()
                 findNavController().navigate(action)
             }
+
+            ivSetting.setOnClickListener {
+
+            }
         }
 
         viewModel.getUserByName("a")
