@@ -28,11 +28,20 @@
                 android:src="@drawable/github_logo_black"
                 tools:ignore="ContentDescription" />
 
+            <ImageView
+                android:id="@+id/iv_favorite"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_round_star_24"
+                tools:ignore="ContentDescription,UnusedAttribute" />
+
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/sv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start" />
+                android:layout_gravity="end" />
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>

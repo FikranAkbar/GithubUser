@@ -32,8 +32,15 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                 adapter = userAdapter
             }
 
-            svUser.onQueryTextChanged {
-                viewModel.searchQuery.postValue(it)
+            svUser.apply {
+                onQueryTextChanged {
+                    viewModel.searchQuery.postValue(it)
+                }
+            }
+
+            ivFavorite.setOnClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToFavoriteUserFragment()
+                findNavController().navigate(action)
             }
         }
 
@@ -62,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), UserAdapter.OnItemClickCa
                     is HomeViewModel.HomeEvent.SuccessQuery -> {
                         showLoading(false)
                         userAdapter.submitList(event.result)
-                        when(userAdapter.itemCount) {
+                        when (userAdapter.itemCount) {
                             0 -> {
                                 showEmptyListWarning(true)
                             }
