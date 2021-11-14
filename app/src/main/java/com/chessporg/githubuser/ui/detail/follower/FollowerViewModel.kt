@@ -28,6 +28,10 @@ class FollowerViewModel : ViewModel() {
         followerEventChannel.send(FollowerEvent.Error(message))
     }
 
+    fun onGithubUserItemClick(user: UserResponse) = viewModelScope.launch {
+        followerEventChannel.send(FollowerEvent.NavigateToDetailFragment(user))
+    }
+
     fun getUserFollower(username: String) = viewModelScope.launch {
         onGetUserFollowerStarted()
         APIClient
@@ -40,8 +44,7 @@ class FollowerViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         onGetUserFollowerSuccess(response.body()!!)
-                    }
-                    else {
+                    } else {
                         onGetUserFollowerFailed("Fetching Data Failed...")
                     }
                 }
@@ -57,5 +60,6 @@ class FollowerViewModel : ViewModel() {
         object Loading : FollowerEvent()
         data class Success(val result: ArrayList<UserResponse>) : FollowerEvent()
         data class Error(val message: String) : FollowerEvent()
+        data class NavigateToDetailFragment(val user: UserResponse) : FollowerEvent()
     }
 }

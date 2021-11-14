@@ -12,25 +12,25 @@ import retrofit2.http.Query
 
 interface APIService {
     @GET("search/users")
-    @Headers("Authorization: token ${BuildConfig.GithubUserApi}")
+    //@Headers("Authorization: token ${BuildConfig.GithubUserApi}") TOKEN EXPIRED
     fun getUsersByName(
         @Query("q") query: String
     ): Call<UserListResponse>
 
     @GET("users/{user}")
-    @Headers("Authorization: token ${BuildConfig.GithubUserApi}")
+    //@Headers("Authorization: token ${BuildConfig.GithubUserApi}") TOKEN EXPIRED
     fun getUserDetail(
         @Path("user") user: String
     ): Call<UserDetailResponse>
 
     @GET("users/{user}/followers")
-    @Headers("Authorization: token ${BuildConfig.GithubUserApi}")
+    //@Headers("Authorization: token ${BuildConfig.GithubUserApi}") TOKEN EXPIRED
     fun getUserFollowers(
         @Path("user") user: String
     ): Call<ArrayList<UserResponse>>
 
     @GET("users/{user}/following")
-    @Headers("Authorization: token ${BuildConfig.GithubUserApi}")
+    //@Headers("Authorization: token ${BuildConfig.GithubUserApi}") TOKEN EXPIRED
     fun getUserFollowing(
         @Path("user") user: String
     ): Call<ArrayList<UserResponse>>

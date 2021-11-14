@@ -15,6 +15,9 @@
     <string name="tab_text_2">Following</string>
     <string name="user_id">user id</string>
     <string name="user_s_not_found">User(s) not found</string>
+    <string name="back">Back</string>
+    <string name="company_location">%1s - %2s</string>
+    <string name="favorite_user">Favorite User</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
