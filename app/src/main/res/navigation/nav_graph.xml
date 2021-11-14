@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteUserFragment"
+            app:destination="@id/favoriteUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -27,6 +30,14 @@
             app:argType="string" />
         <action
             android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteUserFragment"
+        android:name="com.chessporg.githubuser.ui.favorite.FavoriteUserFragment"
+        android:label="FavoriteUserFragment" >
+        <action
+            android:id="@+id/action_favoriteUserFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

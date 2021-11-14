@@ -45,10 +45,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 viewModel.onBackClick()
             }
             ivShare.setOnClickListener {
-                viewModel.onShareClick(viewModel.user!!)
+                viewModel.onShareClick(viewModel.username!!)
             }
             ivFavorite.setOnClickListener {
-                viewModel.onFavoriteClick()
+                isFavorited = !isFavorited
+                viewModel.onFavoriteClick(isFavorited)
             }
         }
 
@@ -68,6 +69,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         TabLayoutMediator(tabs, viewPager) { tab, position ->
                             tab.text = resources.getString(TAB_TITLES[position])
                         }.attach()
+                    }
+                    is DetailViewModel.DetailUserEvent.InitFavoriteState -> {
+                        isFavorited = event.isUserAlreadyFavorite
+                        binding.ivFavorite.apply {
+                            Glide.with(requireContext())
+                                .load(if (isFavorited) R.drawable.ic_round_star_24 else R.drawable.ic_round_star_border_24)
+                                .into(this)
+                        }
                     }
                     is DetailViewModel.DetailUserEvent.NavigateBackToHome -> {
                         findNavController().popBackStack()
@@ -114,7 +123,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         }
                     }
                     is DetailViewModel.DetailUserEvent.ChangeFavoriteState -> {
-                        isFavorited = !isFavorited
                         binding.ivFavorite.apply {
                             Glide.with(requireContext())
                                 .load(if (isFavorited) R.drawable.ic_round_star_24 else R.drawable.ic_round_star_border_24)
