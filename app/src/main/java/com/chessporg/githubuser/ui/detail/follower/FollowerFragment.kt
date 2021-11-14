@@ -1,17 +1,17 @@
 package com.chessporg.githubuser.ui.detail.follower
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chessporg.githubuser.R
 import com.chessporg.githubuser.data.model.UserResponse
 import com.chessporg.githubuser.databinding.FragmentFollowBinding
 import com.chessporg.githubuser.ui.detail.DetailFragment
-import com.chessporg.githubuser.ui.detail.following.FollowingViewModel
+import com.chessporg.githubuser.ui.detail.DetailFragmentDirections
 import com.chessporg.githubuser.ui.home.UserAdapter
 import kotlinx.coroutines.flow.collect
 
@@ -52,7 +52,7 @@ class FollowerFragment : Fragment(R.layout.fragment_follow), UserAdapter.OnItemC
                     is FollowerViewModel.FollowerEvent.Success -> {
                         showLoading(false)
                         userAdapter.submitList(event.result)
-                        when(userAdapter.itemCount) {
+                        when (userAdapter.itemCount) {
                             0 -> {
                                 showEmptyListWarning(true)
                             }
@@ -60,6 +60,11 @@ class FollowerFragment : Fragment(R.layout.fragment_follow), UserAdapter.OnItemC
                                 showEmptyListWarning(false)
                             }
                         }
+                    }
+                    is FollowerViewModel.FollowerEvent.NavigateToDetailFragment -> {
+                        val action =
+                            DetailFragmentDirections.actionDetailFragmentSelf(event.user.username)
+                        findNavController().navigate(action)
                     }
                 }
             }
@@ -95,6 +100,6 @@ class FollowerFragment : Fragment(R.layout.fragment_follow), UserAdapter.OnItemC
     }
 
     override fun onItemClicked(user: UserResponse) {
-
+        viewModel.onGithubUserItemClick(user)
     }
 }

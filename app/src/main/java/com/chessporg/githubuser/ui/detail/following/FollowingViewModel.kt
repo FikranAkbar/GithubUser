@@ -28,6 +28,10 @@ class FollowingViewModel : ViewModel() {
         followingEventChannel.send(FollowingEvent.Error(message))
     }
 
+    fun onGithubUserItemClick(user: UserResponse) = viewModelScope.launch {
+        followingEventChannel.send(FollowingEvent.NavigateToDetailUser(user))
+    }
+
     fun getUserFollowing(username: String) = viewModelScope.launch {
         onGetUserFollowingStarted()
         APIClient
@@ -56,5 +60,6 @@ class FollowingViewModel : ViewModel() {
         object Loading : FollowingEvent()
         data class Success(val result: ArrayList<UserResponse>) : FollowingEvent()
         data class Error(val message: String) : FollowingEvent()
+        data class NavigateToDetailUser(val user: UserResponse) : FollowingEvent()
     }
 }

@@ -1,10 +1,12 @@
 package com.chessporg.githubuser.data.room
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_user_table")
 data class FavoriteUser(
-    val id: Int,
     val login: String,
-    val avatar_url: String
+    val avatar_url: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int
 )
