@@ -18,13 +18,7 @@ fun mapFavoriteUsersToUserResponses(users: List<FavoriteUser>): List<UserRespons
     }
 }
 
-fun mapFavoriteUserToUserResponse(user: FavoriteUser): UserResponse {
-    user.apply {
-        return UserResponse(login, id, avatar_url)
-    }
-}
-
-fun mapUserResponseToFavoriteUser(user: UserResponse) : FavoriteUser {
+fun mapUserResponseToFavoriteUser(user: UserResponse): FavoriteUser {
     user.apply {
         return FavoriteUser(id, username, avatar_url)
     }

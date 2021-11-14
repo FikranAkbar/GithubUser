@@ -1,12 +1,10 @@
 package com.chessporg.githubuser.data.api
 
-import com.chessporg.githubuser.BuildConfig
 import com.chessporg.githubuser.data.model.UserDetailResponse
 import com.chessporg.githubuser.data.model.UserListResponse
 import com.chessporg.githubuser.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 

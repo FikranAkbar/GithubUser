@@ -9,10 +9,8 @@ import androidx.room.RoomDatabase
 abstract class FavoriteUserDatabase : RoomDatabase() {
     abstract fun favoriteUserDao(): FavoriteUserDao
 
-    private lateinit var instance: FavoriteUserDatabase
-
     companion object {
-        var INSTANCE : FavoriteUserDatabase? = null
+        private var INSTANCE : FavoriteUserDatabase? = null
 
         fun getInstance(context: Context): FavoriteUserDatabase {
             if (INSTANCE != null) {
@@ -25,7 +23,7 @@ abstract class FavoriteUserDatabase : RoomDatabase() {
                         "favorite_user_database"
                     ).build()
                     INSTANCE = instance
-                    return INSTANCE as FavoriteUserDatabase
+                    return instance
                 }
             }
         }

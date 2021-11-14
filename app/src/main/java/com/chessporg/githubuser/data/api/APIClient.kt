@@ -34,7 +34,7 @@ object APIClient {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    fun retrofit(): Retrofit {
+    private fun retrofit(): Retrofit {
         return retrofit
     }
 
