@@ -11,6 +11,9 @@ interface FavoriteUserDao {
     @Delete
     suspend fun deleteFavoriteUser(favoriteUser: FavoriteUser)
 
+    @Query("SELECT count(*) FROM favorite_user_table WHERE id = :id")
+    suspend fun isUserFavorited(id: Int): Int
+
     @Query("SELECT * FROM favorite_user_table")
     fun getAllFavoriteUser(): Flow<List<FavoriteUser>>
 }
