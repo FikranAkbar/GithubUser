@@ -32,23 +32,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by viewModels()
     private lateinit var binding: FragmentDetailBinding
+    private var isFavorited: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
 
-        val mBundle = Bundle()
-        val username = viewModel.user!!
-        mBundle.putString(EXTRA_USERNAME, username)
-        viewModel.getUserDetail(username)
-
-        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity() as AppCompatActivity, mBundle)
-        val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = view.findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+        viewModel.onInitFragment()
 
         binding.apply {
             ivBackButton.setOnClickListener {
@@ -57,19 +47,39 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ivShare.setOnClickListener {
                 viewModel.onShareClick(viewModel.user!!)
             }
+            ivFavorite.setOnClickListener {
+                viewModel.onFavoriteClick()
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.detailUserEvent.collect { event ->
-                when(event) {
-                    DetailViewModel.DetailUserEvent.NavigateBackToHome -> {
+                when (event) {
+                    is DetailViewModel.DetailUserEvent.InitDetailFragment -> {
+                        val mBundle = Bundle()
+                        mBundle.putString(EXTRA_USERNAME, event.username)
+                        viewModel.getUserDetail(event.username)
+
+                        val sectionsPagerAdapter =
+                            SectionsPagerAdapter(requireActivity() as AppCompatActivity, mBundle)
+                        val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
+                        viewPager.adapter = sectionsPagerAdapter
+                        val tabs: TabLayout = view.findViewById(R.id.tabs)
+                        TabLayoutMediator(tabs, viewPager) { tab, position ->
+                            tab.text = resources.getString(TAB_TITLES[position])
+                        }.attach()
+                    }
+                    is DetailViewModel.DetailUserEvent.NavigateBackToHome -> {
                         findNavController().popBackStack()
                     }
                     is DetailViewModel.DetailUserEvent.ShareGithubUserData -> {
                         val shareIntent = Intent()
                         shareIntent.action = Intent.ACTION_SEND
                         shareIntent.type = "text/plain"
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Github Username: ${event.username}")
+                        shareIntent.putExtra(
+                            Intent.EXTRA_TEXT,
+                            "Github Username: ${event.username}"
+                        )
                         startActivity(Intent.createChooser(shareIntent, "Share Github Username to"))
                     }
                     is DetailViewModel.DetailUserEvent.Error -> {
@@ -84,17 +94,31 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                                 tvName.text = name
                                 tvUsername.text = username
                                 tvUserId.text = "$id"
-                                tvFollowerFollowing.text = getString(R.string.follower_1_s_following_2_s, followers.toString(), following.toString())
-                                tvRepository.text = getString(R.string.repository_1s, public_repos.toString())
-                                tvCompanyLocation.text = getString(R.string.company_location, company, location)
+                                tvFollowerFollowing.text = getString(
+                                    R.string.follower_1_s_following_2_s,
+                                    followers.toString(),
+                                    following.toString()
+                                )
+                                tvRepository.text =
+                                    getString(R.string.repository_1s, public_repos.toString())
+                                tvCompanyLocation.text =
+                                    getString(R.string.company_location, company, location)
 
                                 Glide.with(this@DetailFragment)
                                     .load(avatar_url)
-                                    .apply(RequestOptions().override(200,200))
+                                    .apply(RequestOptions().override(200, 200))
                                     .into(civProfilPicture)
                             }
 
                             showLoading(false)
+                        }
+                    }
+                    is DetailViewModel.DetailUserEvent.ChangeFavoriteState -> {
+                        isFavorited = !isFavorited
+                        binding.ivFavorite.apply {
+                            Glide.with(requireContext())
+                                .load(if (isFavorited) R.drawable.ic_round_star_24 else R.drawable.ic_round_star_border_24)
+                                .into(this)
                         }
                     }
                 }

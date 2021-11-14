@@ -29,6 +29,14 @@ class DetailViewModel(
         detailUserEventChannel.send(DetailUserEvent.ShareGithubUserData(username))
     }
 
+    fun onFavoriteClick() = viewModelScope.launch {
+        detailUserEventChannel.send(DetailUserEvent.ChangeFavoriteState)
+    }
+
+    fun onInitFragment() = viewModelScope.launch {
+        detailUserEventChannel.send(DetailUserEvent.InitDetailFragment(user!!))
+    }
+
     private fun onGetUserDetailStarted() = viewModelScope.launch {
         detailUserEventChannel.send(DetailUserEvent.Loading)
     }
@@ -66,8 +74,10 @@ class DetailViewModel(
     }
 
     sealed class DetailUserEvent {
+        data class InitDetailFragment(val username: String) : DetailUserEvent()
         object NavigateBackToHome : DetailUserEvent()
         data class ShareGithubUserData(val username: String) : DetailUserEvent()
+        object ChangeFavoriteState : DetailUserEvent()
         object Loading : DetailUserEvent()
         data class Success(val data: UserDetailResponse) : DetailUserEvent()
         data class Error(val message: String) : DetailUserEvent()
