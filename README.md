@@ -21,8 +21,7 @@ The project implementing android jetpack component such as:
 
 There are several conditions before you can clone this project and connect it with your own firebase project and use the model you created yourself
 * [Latest version of android studio](https://developer.android.com/?hl=id)
-* [Github Api Key](https://console.firebase.google.com/u/0/)
-* [Tflite model](https://www.tensorflow.org/lite/guide)
+* [Github Api Key](https://github.com/settings/tokens)
 
 ### Installation
 
