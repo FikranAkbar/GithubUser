@@ -13,7 +13,7 @@ The project implementing android jetpack component such as:
 
 ### Demo
 
-<img src="https://github.com/FikranAkbar/Acne-Scan/blob/master/20211227_143949.gif"  height="440" />    <img src="https://github.com/FikranAkbar/Acne-Scan/blob/master/20211227_144221.gif"  height="440" />
+<img src="https://github.com/FikranAkbar/GithubUser/blob/master/20211227_155802.gif"  height="440" /> <img src="https://github.com/FikranAkbar/GithubUser/blob/master/20211227_160033.gif"  height="440" /> <img src="https://github.com/FikranAkbar/GithubUser/blob/master/20211227_160259.gif"  height="440" />
 
 ## Getting Started
 
