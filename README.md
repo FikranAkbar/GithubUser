@@ -26,14 +26,11 @@ There are several conditions before you can clone this project and connect it wi
 
 ### Installation
 
-1. Clone the repo https://github.com/LuhutPakpahan/Capstone.git
-2. Replace the google-services.json file with your own. The file is located in the app folder ('root folder'/app/google-services.json)
-3. Don't forget to make sure that your project is now connected to the firebase project
-4. To replace the current model with your own, right click on the app folder and click New > Other > Tensorflow Lite Model
-5. Enter your tflite model by navigating the model location to the tflite file you have prepared, then click next and finish
-6. Go to "UploadDataActivity" and replace the class reference of the existing model by changing the code "Acnescan6" to the class name of your model.
-7. And you're good to go.
-* Tips: You can use ctrl + r, then write "Acnescan6" and fill in the class name of the model you have entered
+Creating a token (if you didn't have yet) by reading [this documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). When done, follow the steps below:
+1. Clone the repo https://github.com/FikranAkbar/GithubUser.git
+2. Replace "GithubUserApi" in gradle.properties file
+3. Build the project
+4. And you're good to go.
 
 <!-- CONTRIBUTING -->
 ## Contributing
