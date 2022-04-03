@@ -11,7 +11,7 @@ Project for submission in "Belajar Fundamental Android" course dicoding. Github 
 
 ## Build With
 
-The project implementing android jetpack component such as:
+- [Android_Studio](https://developer.android.com/studio/)
 - [Retrofit (API Integration)](https://square.github.io/retrofit/)
 - [Fragment](https://developer.android.com/guide/fragments)
 - [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)
