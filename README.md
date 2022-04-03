@@ -1,7 +1,16 @@
 <!-- ABOUT THE PROJECT -->
-## Github User
+<h1 align="center">GithubUser</h1></br>
 
+<h5 align="center">
+Repository For GithubUser
+</h5>
+
+<p align="center">
 Project for submission in "Belajar Fundamental Android" course dicoding. Github User is application for searching user in github platform and we can add them to our favorite list.
+</p>
+
+## Build With
+
 The project implementing android jetpack component such as:
 - [Retrofit (API Integration)](https://square.github.io/retrofit/)
 - [Fragment](https://developer.android.com/guide/fragments)
